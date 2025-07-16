@@ -242,13 +242,21 @@ export default function Health() {
       </div>
 
       {/* Bottom Tab Navigation */}
-      <div className="pillar-tab-bar">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-xl border-t border-border/30 safe-area-bottom">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="pillar-tab-list">
-            <TabsTrigger value="overview" className="pillar-tab-trigger">Overview</TabsTrigger>
-            <TabsTrigger value="nutrition" className="pillar-tab-trigger">Nutrition</TabsTrigger>
-            <TabsTrigger value="fitness" className="pillar-tab-trigger">Fitness</TabsTrigger>
-            <TabsTrigger value="sleep" className="pillar-tab-trigger">Sleep</TabsTrigger>
+          <TabsList className="w-full h-16 bg-transparent p-2 grid grid-cols-4 gap-1">
+            <TabsTrigger value="overview" className="flex-1 h-12 text-xs font-medium rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="nutrition" className="flex-1 h-12 text-xs font-medium rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              Nutrition
+            </TabsTrigger>
+            <TabsTrigger value="fitness" className="flex-1 h-12 text-xs font-medium rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              Fitness
+            </TabsTrigger>
+            <TabsTrigger value="sleep" className="flex-1 h-12 text-xs font-medium rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              Sleep
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
