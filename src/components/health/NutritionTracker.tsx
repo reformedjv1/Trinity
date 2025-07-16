@@ -195,9 +195,10 @@ export function NutritionTracker() {
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="search">Search Foods</TabsTrigger>
           <TabsTrigger value="log">Log Food</TabsTrigger>
+          <TabsTrigger value="meal">Build Meal ({currentMeal.length})</TabsTrigger>
           <TabsTrigger value="summary">Daily Summary</TabsTrigger>
         </TabsList>
 
@@ -331,9 +332,19 @@ export function NutritionTracker() {
                 <Button 
                   onClick={logSelectedFood}
                   disabled={!mealType || !servings || isLogging}
-                  className="w-full"
+                  className="w-full mb-2"
                 >
                   {isLogging ? 'Logging...' : 'Log Food'}
+                </Button>
+                
+                <Button
+                  onClick={addToCurrentMeal}
+                  disabled={!servings}
+                  variant="outline"
+                  className="w-full"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add to Meal
                 </Button>
               </CardContent>
             </Card>
@@ -355,6 +366,43 @@ export function NutritionTracker() {
           )}
         </TabsContent>
 
+        <TabsContent value="meal" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Utensils className="h-5 w-5" />
+                Build Complete Meal
+              </CardTitle>
+              <CardDescription>
+                Add multiple foods to create a complete meal entry
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {currentMeal.length > 0 ? (
+                <>
+                  <div className="space-y-2">
+                    <Label>Meal Name (Optional)</Label>
+                    <Input
+                      placeholder="e.g., Breakfast Bowl, Chicken Dinner"
+                      value={mealName}
+                      onChange={(e) => setMealName(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Meal Type</Label>
+                    <Select value={mealType} onValueChange={setMealType}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select meal type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="breakfast">🌅 Breakfast</SelectItem>
+                        <SelectItem value="lunch">☀️ Lunch</SelectItem>
+                        <SelectItem value="dinner">🌙 Dinner</SelectItem>
+                        <SelectItem value="snack">🍎 Snack</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
         <TabsContent value="summary" className="space-y-4">
           {/* Calorie Progress */}
           {healthProfile && (
